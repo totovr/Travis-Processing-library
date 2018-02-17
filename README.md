@@ -2,8 +2,6 @@
 
 Travis is a platform to test and deploy
 
-# Under Construction
-
 [![Build Status](https://travis-ci.org/totovr/Travis-Processing-library.svg?branch=master)](https://travis-ci.org/totovr/Travis-Processing-library)
 
 ## Getting Started
