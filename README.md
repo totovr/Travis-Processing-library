@@ -1,8 +1,8 @@
 # Travis
 
-Travis is a plataform to test and deploy
+Travis is a platform to test and deploy
 
-[![Build Status](https://travis-ci.org/totovr/Travis.svg?branch=master)](https://travis-ci.org/totovr/Travis)
+[![Build Status](https://travis-ci.org/totovr/Travis-Processing-library.svg?branch=master)](https://travis-ci.org/totovr/Travis-Processing-library)
 
 ## Getting Started
 
