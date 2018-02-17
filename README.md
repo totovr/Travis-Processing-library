@@ -26,7 +26,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## More Examples
 
-Check this repository to build [Arduino](https://github.com/totovr/Arduino) programs with travis and PlataformIO
+Check this repository to build [Arduino](https://github.com/totovr/Arduino) programs tasted with travis and PlataformIO
 
 ## Contributing
 
@@ -46,3 +46,5 @@ Antonio Vega Ramirez:
 ## License
 
 This project is licensed under The MIT License (MIT) - see the [LICENSE.md](https://github.com/totovr/Travis/blob/master/LICENSE.md) file for details
+
+
