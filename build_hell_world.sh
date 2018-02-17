@@ -1,7 +1,7 @@
 #!/bin/bash
 myexe="./processing-3.3.6/processing-java"
 
-input_folder="hell_world"
+input_folder="Serial_Processing"
 output_folder=$input_folder"_output"
 
 if [ ! -e $myexe ]
