@@ -7,7 +7,7 @@ before_install:
 script:
   - jdk_switcher use oraclejdk8
   - ./download_processing.sh
-  - ./build_Serial_Processing.sh
+  - ./build_Interface.sh
 
 after_failure:
   - find . | egrep "processing-java"
