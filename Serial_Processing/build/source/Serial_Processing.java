@@ -28,21 +28,18 @@ ControlP5 cp5;
 Knob myKnobA;
 Slider Shoots_One_Slider;
 
-//Player one orbe variables Color
-int r = 186;
-int g = 255;
-int b = 201;
 
-//Serial variables
 //Player one
+//Serial variables
 int serialuniversalvalue = 0;
-
 //Player one knob Variables
 int life_PO = 100;
 int background_death = color(0, 160, 100);
-
 //Slider player one variables Shoot
 int sliderValue_ShootOne = 0;
+//Special weapon Variables
+String IROne_empty = "No";
+String IROne_charged = "No";
 
 //Watch Variables
 int s = second();
@@ -101,7 +98,6 @@ public void setup() {
                             .setColorLabel(0xffFFFFFF)
                             .setSize(40,250)
         ;
-
         //Color of the background
         background(0xffB28DFF);
         //Open the port
@@ -117,18 +113,22 @@ public void draw() {
         image(logo, 966,620,268,95);
         //Title of the game
         fill(255);
+        textFont(title);
         text("BlazerMuscle",470,70);
         //Name of the team
         fill(255);
+        textFont(title);
         text("Team Roger One",430,120);
         //Show the watch
         watch();
-        //Serial_Read
+        //Read the incoming data of the serial port
         Serial_Read_Data();
         //Check for player one
-        Serial_PlayerOne();
-        //show events life for player one
-        life_one();
+        Serial_Event_PlayerOne();
+        //Show events life for player one
+        Player_one();
+        //Show the IR serial event
+        //IR_ShootOne_SerialEvent();
 }
 
 public void watch() {
@@ -145,12 +145,13 @@ public void Serial_Read_Data() {
         }
 }
 
-public void Serial_PlayerOne(){
+public void Serial_Event_PlayerOne(){
         if (serialuniversalvalue == 1) {
                 life_PO = life_PO - 5;
                 fill(255,35,1);
-                ellipse(200,120, frameCount%100, frameCount%100);
+                ellipse(195,120,frameCount%100,frameCount%100);
                 fill(255,35,1);
+                textFont(title);
                 text("Kishishita",85,200);
                 myKnobA.setValue(life_PO);
                 serialuniversalvalue = 0;
@@ -161,23 +162,25 @@ public void Serial_PlayerOne(){
                 serialuniversalvalue = 0;
 
         }
+        if(serialuniversalvalue == 3) {
+                IROne_empty = "Yes";
+                IROne_charged = "Yes";
+        }
 }
 
-public void life_one() {
+public void Player_one() {
+        textFont(title);
         text("Kishishita", 85, 200);
         //Generate the ellipse above the name
         if(life_PO > 50) {
                 noStroke();
-                r = 69;
-                g = 252;
-                b = 131;
-                fill(r, g, b);
-                ellipse(200, 120, frameCount%70, frameCount%70);
+                fill(69,252,131);
+                ellipse(195,120,frameCount%70,frameCount%70);
         }
         if((life_PO <= 50) && (life_PO > 0)) {
                 //If the user end the game change the color to yellow
                 fill(255,247,77);
-                ellipse(200, 120, frameCount%50, frameCount%50);
+                ellipse(195,120,frameCount%50,frameCount%50);
                 background_death = color(255,247,77);
                 myKnobA.setColorForeground(0xff794DFF);
                 myKnobA.setColorBackground(background_death);
@@ -186,12 +189,36 @@ public void life_one() {
         if (life_PO <= 0) {
                 //If the user end the game change the color to red
                 fill(255,35,1);
-                ellipse(200, 120, frameCount%20, frameCount%20);
+                ellipse(195, 120,frameCount%20,frameCount%20);
                 background_death = color(255,35,1);
                 myKnobA.setColorBackground(background_death);
                 myKnobA.setColorValue(255);
         }
+        if(IROne_empty == "No") {
+                //Red indicate that the Special Weapon is not loaded
+                fill(0,112,184);
+                ellipse(97,560,frameCount%50,frameCount%50);
+                textFont(life_title);
+                text("Special Weapon", 132, 567);
+        }
+        if(IROne_charged == "Yes") {
+                fill(0xff0F34FA);
+                ellipse(100, 560,frameCount%50,frameCount%50);
+                textFont(life_title);
+                text("Special Weapon Loaded", 132, 567);
+                //IROne_empty = "No";
+                //IROne_charged = "No";
+        }
 }
+
+/*void IR_ShootOne_SerialEvent() {
+        if(serialuniversalvalue == 4) {
+                fill(#12FA0F);
+                ellipse(100, 560,frameCount%90,frameCount%90);
+                textFont(life_title);
+                text("Special Weapon Shooted", 132, 567);
+        }
+}*/
 class StopWatchTimer {
   int startTime = 0, stopTime = 0;
   boolean running = false; 
